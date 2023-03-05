@@ -1,7 +1,7 @@
 const player1 = 'O';
 const player2 = 'X';
 let currentPlayer = player1;
-let win = false;
+let endGame = false;
 
 const restartButton = document.getElementById('restart');
 const board = document.getElementsByClassName('board');
@@ -47,7 +47,7 @@ function gameOver() {
 }
 
 restartButton.addEventListener('click', () => {
-    win = false;
+    endGame = false;
     currentPlayer = player1;
 
     for (let i = 0; i < buttons.length; i++) {
@@ -60,7 +60,7 @@ restartButton.addEventListener('click', () => {
 
 for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', () => {
-        if (!win && gameState[i] === null) {
+        if (!endGame && gameState[i] === null) {
             buttons[i].textContent = currentPlayer;
             gameState[i] = currentPlayer;
 
@@ -70,11 +70,11 @@ for (let i = 0; i < buttons.length; i++) {
                 alert("Temos um empate!")
             }
 
-            win = gameOver();
+            endGame = gameOver();
             currentPlayer = (currentPlayer === player1) ? player2 : player1;
         }
 
-        if (win) {
+        if (endGame) {
             restartButton.style.visibility = 'visible'
         }
     })
