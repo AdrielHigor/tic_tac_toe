@@ -4,6 +4,7 @@ let currentPlayer = player1;
 let endGame = false;
 
 const restartButton = document.getElementById('restart');
+const message = document.getElementById('message');
 const board = document.getElementsByClassName('board');
 const buttons = document.getElementsByClassName('button');
 const gameState = [null, null, null, null, null, null, null, null, null];
@@ -54,8 +55,9 @@ restartButton.addEventListener('click', () => {
         buttons[i].textContent = null;
         gameState[i] = null;
     }
-
-    restartButton.style.visibility = 'hidden'
+    message.textContent = "";
+    message.style.visibility = 'hidden';
+    restartButton.style.visibility = "hidden";
 })
 
 for (let i = 0; i < buttons.length; i++) {
@@ -65,9 +67,11 @@ for (let i = 0; i < buttons.length; i++) {
             gameState[i] = currentPlayer;
 
             if (checkForWin()) {
-                alert(`${currentPlayer} venceu!`);
+                message.style.visibility = 'visible';
+                message.textContent = `"${currentPlayer}" venceu!`;
             } else if (isBoardFull()) {
-                alert("Temos um empate!")
+                message.style.visibility = 'visible';
+                message.textContent = "Temos um empate!";
             }
 
             endGame = gameOver();
